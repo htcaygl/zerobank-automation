@@ -14,6 +14,7 @@ public class AccountActivityPage extends BasePage{
     Select dropdown= new Select(Driver.get().findElement(By.id("aa_accountId")));
 
     public WebElement dropdownDefault(){
+
         return dropdown.getFirstSelectedOption();
     }
 
@@ -24,7 +25,20 @@ public class AccountActivityPage extends BasePage{
     @FindBy(css = "#all_transactions_for_account th")
     public List<WebElement> tableColumns;
 
+    @FindBy(xpath = "//a[.='Find Transactions']")
+    public WebElement findTransactions;
 
+    @FindBy(id= "aa_fromDate")
+    public WebElement dateFrom;
+
+    @FindBy(id = "aa_toDate")
+    public WebElement dateTo;
+
+    @FindBy(css = ".btn.btn-primary")
+    public WebElement findBtn;
+
+    @FindBy(xpath = "//*[@id='filtered_transactions_for_account']//td[contains(text(),'2012-09')]")
+    public List<WebElement> dates;
 
 
 }

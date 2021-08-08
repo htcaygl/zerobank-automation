@@ -26,7 +26,6 @@ Feature: Navigating to specific accounts in Accounts Activity
     And dropdown default option should be "Credit Card"
 
 
-  @wip
   Scenario: Loan account redirect
     Given the user in logged in
     When the user clicks on "Loan" link on the Account Summary page

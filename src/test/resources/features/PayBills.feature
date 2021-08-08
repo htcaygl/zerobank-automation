@@ -13,6 +13,7 @@ Feature: Pay Bills
     And user completes successfully Pay operation
     Then user should see "The payment was successfully submitted." message
 
+
     #Pdf msg was different. "Please fill out this field"
   Scenario: When user doesn't enter amount or date field, user should see "Please fill out this field message"
     And user doesn't enter amount or date and click pay button
