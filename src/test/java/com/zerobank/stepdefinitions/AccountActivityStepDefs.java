@@ -198,18 +198,55 @@ public class AccountActivityStepDefs {
     @Then("results table should show at least one result under {string}")
     public void results_table_should_show_at_least_one_result_under(String str) {
 
+
         List<WebElement> actualResult=new ArrayList<>();
 
-        if(str.equals("Deposit"))
-          actualResult.addAll(new AccountActivityPage().underDepositColumns);
-        else if(str.equals("Withdrawal"))
-          actualResult.addAll(new AccountActivityPage().underWithdrawalColumns);
+        if (str.equals("Deposit"))
+                actualResult.addAll(new AccountActivityPage().underDepositColumns);
+            else if (str.equals("Withdrawal"))
+                actualResult.addAll(new AccountActivityPage().underWithdrawalColumns);
 
 
         System.out.println("actualResult.size() = " + actualResult.size());
         System.out.println("BrowserUtils.getElementsText(actualResult) = " + BrowserUtils.getElementsText(actualResult));
         Assert.assertTrue(actualResult.size()!=0);
+
     }
 
+    @When("user selects type {string}")
+    public void user_selects_type(String txt) {
+
+        new AccountActivityPage().selectType(txt);
+        new AccountActivityPage().findBtn.click();
+        BrowserUtils.waitFor(3);
+    }
+
+    @Then("results table should show no result under {string}")
+    public void results_table_should_show_no_result_under(String str) {
+
+
+        List<WebElement> actualResult=new ArrayList<>();
+
+        if (str.equals("Deposit"))
+            actualResult.addAll(new AccountActivityPage().underDepositColumns);
+        else if (str.equals("Withdrawal"))
+            actualResult.addAll(new AccountActivityPage().underWithdrawalColumns);
+
+
+        List<String> actualStrings= BrowserUtils.getElementsText(actualResult);
+
+        boolean flag=true;
+
+        for (String each : actualStrings) {
+
+           if(!each.isEmpty()) {
+               flag = false;
+               break;
+           }
+        }
+
+       Assert.assertTrue(flag);
+
+    }
 
 }

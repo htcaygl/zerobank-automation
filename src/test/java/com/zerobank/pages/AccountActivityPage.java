@@ -1,6 +1,8 @@
 package com.zerobank.pages;
 
+import com.zerobank.utilities.BrowserUtils;
 import com.zerobank.utilities.Driver;
+import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,6 +46,15 @@ public class AccountActivityPage extends BasePage{
     public WebElement description;
 
 
+
+
+    public void selectType(String txt){
+
+        Select dropdownType= new Select(Driver.get().findElement(By.id("aa_type")));
+        dropdownType.selectByVisibleText(txt);
+    }
+
+
     public List<WebElement> getTableDescriptionInfo(String str){
 
         return Driver.get().findElements(By.xpath("//div[@id='filtered_transactions_for_account']//td[contains(text(),'"+str+"')]"));
@@ -52,6 +63,11 @@ public class AccountActivityPage extends BasePage{
 
     @FindBy(xpath = "//div[@id='filtered_transactions_for_account']//td[3]")
     public List<WebElement> underDepositColumns;
+
+//    public List<WebElement> getUnderDepositColumns(){
+//        return  Driver.get().findElements(By.xpath("//div[@id='filtered_transactions_for_account']//td[3]"));
+//    }
+
 
     @FindBy(xpath = "//div[@id='filtered_transactions_for_account']//td[4]")
     public List<WebElement> underWithdrawalColumns;
