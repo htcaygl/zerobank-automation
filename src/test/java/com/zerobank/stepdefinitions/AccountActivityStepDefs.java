@@ -5,10 +5,7 @@ import com.zerobank.pages.AccountSummaryPage;
 import com.zerobank.utilities.BrowserUtils;
 import com.zerobank.utilities.Driver;
 import io.cucumber.java.bs.A;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import io.cucumber.java.en_old.Ac;
 import javafx.collections.transformation.SortedList;
 import org.apache.commons.compress.archivers.ar.ArArchiveEntry;
@@ -20,6 +17,7 @@ import org.openqa.selenium.support.ui.Select;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -150,6 +148,68 @@ public class AccountActivityStepDefs {
 
     }
 
+    @When("the user enters description {string}")
+    public void the_user_enters_description(String string) {
+
+        new AccountActivityPage().description.clear();
+        new AccountActivityPage().description.sendKeys(string);
+    }
+
+    @Then("results table should only show descriptions containing {string}")
+    public void results_table_should_only_show_descriptions_containing(String str) {
+
+        List<String> actualTableDescription= BrowserUtils.getElementsText(new AccountActivityPage().getTableDescriptionInfo(str));
+
+        System.out.println("actualTableDescription = " + actualTableDescription);
+
+        boolean flag=true;
+
+        for (String s : actualTableDescription) {
+            if(!s.contains(str)) {
+                flag=false;  // if there is something different from str in List, Assert become false.
+                break;
+            }
+        }
+
+        Assert.assertTrue(flag);
+
+    }
+
+    @Then("results table should not show descriptions containing {string}")
+    public void results_table_should_not_show_descriptions_containing(String str) {
+
+        List<String> actualTableDescription= BrowserUtils.getElementsText(new AccountActivityPage().getTableDescriptionInfo(str));
+
+        System.out.println("actualTableDescription = " + actualTableDescription);
+
+        boolean flag=true;
+
+        for (String s : actualTableDescription) {
+            if(s.contains(str)) {
+                flag=false;  // if there is str in List, Assert become false.
+                break;
+            }
+        }
+
+        Assert.assertTrue(flag);
+
+    }
+
+    @Then("results table should show at least one result under {string}")
+    public void results_table_should_show_at_least_one_result_under(String str) {
+
+        List<WebElement> actualResult=new ArrayList<>();
+
+        if(str.equals("Deposit"))
+          actualResult.addAll(new AccountActivityPage().underDepositColumns);
+        else if(str.equals("Withdrawal"))
+          actualResult.addAll(new AccountActivityPage().underWithdrawalColumns);
+
+
+        System.out.println("actualResult.size() = " + actualResult.size());
+        System.out.println("BrowserUtils.getElementsText(actualResult) = " + BrowserUtils.getElementsText(actualResult));
+        Assert.assertTrue(actualResult.size()!=0);
+    }
 
 
 }

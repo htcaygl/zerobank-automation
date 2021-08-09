@@ -40,5 +40,20 @@ public class AccountActivityPage extends BasePage{
     @FindBy(xpath = "//*[@id='filtered_transactions_for_account']//td[contains(text(),'2012-09')]")
     public List<WebElement> dates;
 
+    @FindBy(id="aa_description")
+    public WebElement description;
+
+
+    public List<WebElement> getTableDescriptionInfo(String str){
+
+        return Driver.get().findElements(By.xpath("//div[@id='filtered_transactions_for_account']//td[contains(text(),'"+str+"')]"));
+
+    }
+
+    @FindBy(xpath = "//div[@id='filtered_transactions_for_account']//td[3]")
+    public List<WebElement> underDepositColumns;
+
+    @FindBy(xpath = "//div[@id='filtered_transactions_for_account']//td[4]")
+    public List<WebElement> underWithdrawalColumns;
 
 }
