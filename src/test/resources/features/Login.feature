@@ -1,4 +1,4 @@
-@login
+
 Feature:Login Feature
 
   Background:
@@ -14,12 +14,35 @@ Feature:Login Feature
     Then user should not be able to login
     And user should see "Login and/or password are wrong." error message
 
-Scenario: Do not login with blank username and valid password
-  When the user enters blank username and valid password
-  Then user should not be able to login
-  And user should see "Login and/or password are wrong." error message
+  Scenario: Do not login with blank username and valid password
+    When the user enters blank username and valid password
+    Then user should not be able to login
+    And user should see "Login and/or password are wrong." error message
 
   Scenario: Do not login with valid username and blank password
     When the user enters valid username and blank password
     Then user should not be able to login
     And user should see "Login and/or password are wrong." error message
+
+
+  Scenario Outline: Do not login with invalid credential
+
+    Given the user in on the login page
+    When the user enters "<username>" and "<password>"
+    Then user should not be able to login
+    And user should see "Login and/or password are wrong." error message
+
+    Examples:
+      | username |  | password |
+      | wrong    |  | wrong    |
+      |          |  | password |
+      | username |  |          |
+
+
+
+
+
+
+#    And user should see "Login and/or password are wrong." error message
+
+

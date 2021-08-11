@@ -85,8 +85,46 @@ public class PayBillsStepDefs {
 
 
         Assert.assertEquals(options,actualOptions);
+    }
 
+    @When("user tries to calculate cost without selecting a currency")
+    public void user_tries_to_calculate_cost_without_selecting_a_currency() {
+        new PayBillsPage().calculateCostBtn.click();
+        new PayBillsPage().alert();
+    }
+
+    @When("user tries to calculate cost without entering a value")
+    public void user_tries_to_calculate_cost_without_selecting_entering_a_value() {
+        new PayBillsPage().calculateCostBtn.click();
+        new PayBillsPage().alert();
+    }
+
+
+    @Then("error message should be displayed")
+    public void error_message_should_be_displayed() {
+
+        String alertMsg=new PayBillsPage().alert().getText();
+
+        System.out.println("alertMsg = " + alertMsg);
+
+        Assert.assertFalse(alertMsg.isEmpty());
 
     }
+
+    @When("user tries to send alphabetical characters to date field")
+    public void user_tries_to_send_alphabetical_characters_to_date_field() {
+
+        new PayBillsPage().dateInput.sendKeys("some input");
+
+    }
+
+    @Then("user should not be able to sendkeys to date field")
+    public void user_should_not_be_able_to_sendkeys_to() {
+
+
+        Assert.assertFalse(new PayBillsPage().dateInput.getText().equals("some input"));
+    }
+
+
 
 }

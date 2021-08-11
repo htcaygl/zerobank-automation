@@ -65,6 +65,7 @@ public class LoginStepDefs {
 
         String actualTitle= Driver.get().getTitle();
         Assert.assertNotEquals("Zero - Account Summary", actualTitle);
+
     }
 
     @Then("user should see {string} error message")
@@ -96,4 +97,13 @@ public class LoginStepDefs {
 
     }
 
+    @When("the user enters {string} and {string}")
+    public void the_user_enters_and(String username, String password) {
+
+        LoginPage loginPage= new LoginPage();
+
+        loginPage.login(username,password);
+
+
+    }
 }

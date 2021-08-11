@@ -32,3 +32,21 @@ Feature: Navigating to specific accounts in Accounts Activity
     Then the user should be able to see "Zero - Account Activity" title
     And dropdown default option should be "Loan"
 
+
+    @wip
+#    This does same as above. I use scenario outline here
+  Scenario Outline:<accountType>  Account redirect
+
+    Given the user in logged in
+    When the user clicks on "<accountType>" link on the Account Summary page
+    Then the user should be able to see "Zero - Account Activity" title
+    And dropdown default option should be "<accountType>"
+
+
+    Examples:
+      | accountType |
+      | Savings     |
+      | Brokerage   |
+      | Checking    |
+      | Credit Card |
+      | Loan        |

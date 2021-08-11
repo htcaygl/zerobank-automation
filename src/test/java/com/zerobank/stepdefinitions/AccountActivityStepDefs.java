@@ -125,7 +125,6 @@ public class AccountActivityStepDefs {
 
         Assert.assertTrue(value<0);
 
-
     }
 
     @Then("the results table should only not contain transactions dated {string}")

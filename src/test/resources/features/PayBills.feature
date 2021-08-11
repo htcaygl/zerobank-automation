@@ -18,3 +18,7 @@ Feature: Pay Bills
   Scenario: When user doesn't enter amount or date field, user should see "Please fill out this field message"
     And user doesn't enter amount or date and click pay button
     Then user should see "Please fill in this field." warning message
+
+  Scenario: Date field should not accept alphabetical characters.
+    When user tries to send alphabetical characters to date field
+    Then user should not be able to sendkeys to date field

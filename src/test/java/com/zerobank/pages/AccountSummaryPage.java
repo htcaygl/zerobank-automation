@@ -37,14 +37,9 @@ public class AccountSummaryPage extends BasePage {
             case "Loan":
                 i=6;
                 break;
-
-
         }
-
         return Driver.get().findElement(By.xpath("(//a[@style='text-decoration: underline'])["+i+"]"));
     }
-
-
 
 
     public WebElement getAccountType(String accountType){
@@ -76,13 +71,9 @@ public class AccountSummaryPage extends BasePage {
             case "Loan Accounts" :
                i=4;
                break;
-
             }
-
         return Driver.get().findElements(By.xpath("(//table)["+i+"]//th"));
-
     }
-
 
 
 
