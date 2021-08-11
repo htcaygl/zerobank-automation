@@ -109,9 +109,11 @@ public class AccountActivityStepDefs {
         System.out.println("expectedDates = " + expectedDates);
         System.out.println("actualDates = " + actualDates);
 
+        //date 1 need to occur before second date
+        Assert.assertTrue(date1.compareTo(actualDates.get(0))<=0);
 
-        Assert.assertTrue(date1.compareTo(actualDates.get(actualDates.size()-1))<=0);
-
+        //date 2 needs to occur after second date
+        Assert.assertTrue(date2.compareTo(actualDates.get((actualDates.size() - 1)))>=0);
 
     }
 
@@ -120,7 +122,8 @@ public class AccountActivityStepDefs {
 
 
         //compareTo() method compare two DATES,
-        // if first date occurs after second date (it means sorted by most recent), it returns<0
+        // if first date occurs before second date (it means sorted by most recent), it returns<0
+        // the list which is coming from html page start from the latest date..
         int value= (new AccountActivityPage().dates.get(new AccountActivityPage().dates.size() - 1)).getText().compareTo((new AccountActivityPage().dates.get(0)).getText());
 
         Assert.assertTrue(value<0);
@@ -129,7 +132,6 @@ public class AccountActivityStepDefs {
 
     @Then("the results table should only not contain transactions dated {string}")
     public void the_results_table_should_only_not_contain_transactions_dated(String date) {
-
 
 
         List<WebElement> actualDatesElement= new ArrayList<>();
